@@ -3,10 +3,12 @@ package com.metaphorce.service;
 import com.metaphorce.domain.Pelicula;
 import com.metaphorce.dto.PeliculaRequestDTO;
 import com.metaphorce.repository.PeliculaRepository;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
 
+@Service
 public class PeliculaServiceImpl implements PeliculaService{
 
     private final PeliculaRepository peliculaRepository;
