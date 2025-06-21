@@ -1,6 +1,7 @@
 package com.metaphorce.controller;
 
 import com.metaphorce.dto.PeliculaRequestDTO;
+import com.metaphorce.service.PeliculaService;
 import com.metaphorce.service.PeliculaServiceImpl;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -10,7 +11,7 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping ("/peliculas")
 public class PeliculaController {
 
-    private final PeliculaServiceImpl peliculaService;
+    private final PeliculaService peliculaService;
 
     public PeliculaController(PeliculaServiceImpl peliculaService) {
         this.peliculaService = peliculaService;
@@ -63,7 +64,7 @@ public class PeliculaController {
         }
     }
 
-    @PatchMapping ("/{id}")
+    @PutMapping ("/{id}")
     public ResponseEntity<?> marcarPeliculaComoDisponible (@PathVariable int id){
         try {
             peliculaService.marcarPeliculaComoDisponible(id);
