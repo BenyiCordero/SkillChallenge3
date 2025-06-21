@@ -3,6 +3,7 @@ package com.metaphorce.service;
 import com.metaphorce.domain.Pelicula;
 import com.metaphorce.dto.PeliculaRequestDTO;
 import com.metaphorce.repository.PeliculaRepository;
+import jakarta.transaction.Transactional;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -18,15 +19,20 @@ public class PeliculaServiceImpl implements PeliculaService{
     }
 
     @Override
+    @Transactional
     public void agregarPelicula(PeliculaRequestDTO peliculaRequestDTO) {
         try {
-            peliculaRepository.save(new Pelicula(0, peliculaRequestDTO.nombre(), peliculaRequestDTO.disponible()));
+            Pelicula pelicula = new Pelicula();
+            pelicula.setNombre(peliculaRequestDTO.nombre());
+            pelicula.setDisponible(peliculaRequestDTO.disponible());
+            peliculaRepository.save(pelicula);
         } catch (RuntimeException e) {
             throw new RuntimeException(e);
         }
     }
 
     @Override
+    @Transactional
     public void eliminarPelicula(int id) {
         try {
             peliculaRepository.deleteById(id);
@@ -63,6 +69,7 @@ public class PeliculaServiceImpl implements PeliculaService{
     }
 
     @Override
+    @Transactional
     public void marcarPeliculaComoDisponible(int id) {
         Optional<Pelicula> peliculaOptional = peliculaRepository.findById(id);
 
